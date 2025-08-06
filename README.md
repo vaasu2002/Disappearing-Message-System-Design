@@ -29,3 +29,8 @@ Here I will be trying to implement kafka like two-topic architecture. The delay 
 | `DelayWorker`                    | Continuously checks the `DelayQueue`, and if expiration time is reached pushes the message to `MainQueue`. |
 | `MainQueue`                      | Simple FIFO queue where messages are pushed.                                                               |
 | `MainWorker`                     | Reads messages from the `MainQueue` and processes them.                                                    |
+
+The delay queue system is composed of two primary components: the MainTopic static library and the DelayQueue service. The MainTopic library abstracts a message queue and provides a clean, thread-safe interface for publishing and consuming messages. It acts as the central message hub for downstream consumers and can be integrated into any service requiring access to the main message stream. The DelayQueue is a standalone service that manages messages intended for delayed delivery, internally organizing them based on expiration timestamps. It is monitored by one or more DelayWorker threads that continuously check for expired messages. Once a message reaches its expiration time, it is forwarded to the MainTopic through the static interface. This modular design promotes clean separation of concerns, easy testing, and future extensibility toward real-world inter-process or distributed messaging systems.
+
+
+
