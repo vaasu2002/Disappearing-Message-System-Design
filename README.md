@@ -3,7 +3,7 @@
 The disappearing message feature ensures messages are automatically deleted after a specified time period (like WhatsApp's disappearing messages or Snapchat).
 
 ## Core Components
-- **Delay Queue (Priority Queue)-**
+- **Delay Queue System-**
   Maintains a time-ordered queue of messages scheduled for deletion, where the message with the earliest expiry time is always at the head.
 - **Worker Threads Pool-**
   Continuously monitors the delay queue and executes message deletion tasks when their expiry time arrives.
